@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riju Bhandari — Clinical Research & Pharmacovigilance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F6F5;
+    --card:#FFFFFF;
+    --ink:#16232A;
+    --ink-soft:#4B5A61;
+    --navy:#0F2D3D;
+    --teal:#1C7C74;
+    --teal-bright:#2FBFAE;
+    --amber:#D98B2B;
+    --line:#D7DEDC;
+    --line-strong:#B7C2BF;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  h1,h2,h3{
+    font-family:'IBM Plex Sans Condensed', sans-serif;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    font-weight:500;
+  }
+  a{color:inherit;}
+
+  /* ---------- top stamp bar ---------- */
+  .stamp-bar{
+    background:var(--navy);
+    color:#DCEBE8;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:7px 24px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .stamp-bar span{opacity:0.85;}
+  .stamp-bar .dot{color:var(--teal-bright); margin:0 8px;}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(244,246,245,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1040px;
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .nav-id{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.03em;
+  }
+  .nav-links{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    font-size:13.5px;
+    font-weight:500;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    position:relative;
+    padding-bottom:3px;
+    transition:color 0.2s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--teal);}
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:0; height:2px;
+    background:var(--teal-bright);
+    transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after, .nav-links a:focus-visible::after{width:100%;}
+
+  main{max-width:1040px; margin:0 auto; padding:0 24px;}
+  section{padding:64px 0;}
+  section + section{border-top:1px dashed var(--line-strong);}
+
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  /* ---------- hero / CRF header card ---------- */
+  .crf-card{
+    background:var(--card);
+    border:1px solid var(--line-strong);
+    border-radius:4px;
+    box-shadow:0 1px 0 var(--line);
+    overflow:hidden;
+  }
+  .crf-top{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-bottom:1px solid var(--line);
+  }
+  .crf-field{
+    padding:14px 18px;
+    border-right:1px solid var(--line);
+  }
+  .crf-field:last-child{border-right:none;}
+  .crf-field .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:block;
+    margin-bottom:4px;
+  }
+  .crf-field .value{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--navy);
+  }
+  .crf-body{padding:38px 32px 34px;}
+  .hero-name{
+    font-size:clamp(34px, 6vw, 54px);
+    font-weight:700;
+    color:var(--navy);
+    line-height:1.02;
+  }
+  .hero-role{
+    margin-top:8px;
+    font-size:15.5px;
+    color:var(--teal);
+    font-weight:600;
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+  }
+  .hero-obj{
+    margin-top:20px;
+    max-width:640px;
+    color:var(--ink-soft);
+    font-size:15.5px;
+  }
+  .contact-row{
+    margin-top:26px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px;
+    border:1px solid var(--line-strong);
+    border-radius:999px;
+    font-size:13px;
+    font-family:'IBM Plex Mono', monospace;
+    background:#FBFCFC;
+    text-decoration:none;
+    color:var(--ink);
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .chip:hover{border-color:var(--teal); background:#EFFAF8;}
+  .chip .sw{width:7px; height:7px; border-radius:50%; background:var(--teal-bright); flex:none;}
+
+  /* ---------- section headings ---------- */
+  .sec-head{margin-bottom:34px;}
+  .sec-head h2{
+    font-size:28px;
+    color:var(--navy);
+    margin-top:6px;
+  }
+
+  /* ---------- education timeline (Phase I-IV) ---------- */
+  .phase-line{
+    position:relative;
+    padding-left:2px;
+  }
+  .phase-track{
+    position:relative;
+    border-left:2px solid var(--line-strong);
+    margin-left:9px;
+  }
+  .phase-item{
+    position:relative;
+    padding:0 0 34px 32px;
+  }
+  .phase-item:last-child{padding-bottom:2px;}
+  .phase-item::before{
+    content:"";
+    position:absolute;
+    left:-7px; top:2px;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--teal);
+  }
+  .phase-item.current::before{
+    background:var(--teal-bright);
+    box-shadow:0 0 0 4px rgba(47,191,174,0.18);
+  }
+  .phase-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--teal);
+    font-weight:600;
+  }
+  .phase-title{
+    font-size:19px;
+    font-weight:700;
+    color:var(--navy);
+    margin-top:4px;
+  }
+  .phase-meta{
+    margin-top:6px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .phase-meta b{color:var(--ink);}
+
+  /* ---------- skills ---------- */
+  .skill-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  @media (max-width:720px){.skill-grid{grid-template-columns:1fr;}}
+  .skill-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:22px 22px 20px;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .skill-card:hover{border-color:var(--teal); transform:translateY(-2px);}
+  .skill-card h3{
+    font-size:16.5px;
+    color:var(--navy);
+  }
+  .skill-card .eyebrow{display:block; margin-bottom:6px;}
+  .pill-wrap{
+    margin-top:14px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .pill{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    padding:5px 10px;
+    border-radius:3px;
+    background:#EEF3F2;
+    color:var(--ink);
+    border:1px solid var(--line);
+  }
+
+  /* ---------- certifications ---------- */
+  .cert-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  @media (max-width:720px){.cert-grid{grid-template-columns:1fr;}}
+  .cert-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--teal);
+    border-radius:2px;
+    padding:18px 20px;
+  }
+  .cert-card h3{font-size:15.5px; color:var(--navy);}
+  .cert-card .issuer{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-top:3px;
+  }
+  .cert-card ul{
+    margin:12px 0 0;
+    padding-left:18px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .cert-card li{margin-bottom:4px;}
+  .webinar-list{
+    margin-top:26px;
+    border-top:1px dashed var(--line-strong);
+    padding-top:18px;
+  }
+  .webinar-list .eyebrow{margin-bottom:10px; display:block;}
+  .webinar-row{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:9px 0;
+    border-bottom:1px solid var(--line);
+    font-size:13.5px;
+    flex-wrap:wrap;
+  }
+  .webinar-row span:first-child{color:var(--ink);}
+  .webinar-row span:last-child{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--ink-soft);
+    font-size:12px;
+    white-space:nowrap;
+  }
+
+  /* ---------- project ---------- */
+  .project-card{
+    background:var(--card);
+    border:1px solid var(--line-strong);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .project-head{
+    padding:26px 28px 22px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .project-title{
+    font-size:22px;
+    color:var(--navy);
+    font-weight:700;
+    max-width:560px;
+  }
+  .stamp{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--teal);
+    border:2px solid var(--teal);
+    padding:6px 12px;
+    border-radius:3px;
+    transform:rotate(-3deg);
+    white-space:nowrap;
+    font-weight:600;
+  }
+  .cite-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:8px;
+    line-height:1.6;
+  }
+  .cite-line a{color:var(--teal); text-decoration:underline;}
+  .project-body{padding:26px 28px 32px;}
+  .project-body p{color:var(--ink-soft); font-size:14.5px; max-width:680px;}
+  .role-note{
+    margin-top:6px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .role-note b{color:var(--ink);}
+
+  .findings-grid{
+    margin-top:26px;
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:26px;
+  }
+  @media (max-width:800px){.findings-grid{grid-template-columns:1fr;}}
+
+  .data-panel{
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:18px 20px;
+    background:#FBFCFC;
+  }
+  .data-panel .eyebrow{display:block; margin-bottom:12px;}
+  .zoi-row{display:flex; align-items:center; gap:12px; margin-bottom:10px; font-size:12.5px;}
+  .zoi-label{width:98px; flex:none; color:var(--ink-soft); font-family:'IBM Plex Mono', monospace; font-size:11.5px;}
+  .zoi-bar-bg{flex:1; background:#E7ECEA; border-radius:3px; height:14px; overflow:hidden;}
+  .zoi-bar{height:100%; border-radius:3px; background:linear-gradient(90deg, var(--teal), var(--teal-bright));}
+  .zoi-val{width:44px; flex:none; text-align:right; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--navy); font-weight:600;}
+
+  .param-table{width:100%; border-collapse:collapse; font-size:12.5px;}
+  .param-table th, .param-table td{
+    text-align:left;
+    padding:7px 6px;
+    border-bottom:1px solid var(--line);
+  }
+  .param-table th{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  .param-table td.num{font-family:'IBM Plex Mono', monospace; color:var(--navy);}
+
+  .method-strip{
+    margin-top:26px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+  }
+  @media (max-width:720px){.method-strip{grid-template-columns:repeat(2,1fr);}}
+  .method-item{
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:12px 14px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .method-item .num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--teal);
+    font-weight:700;
+    font-size:12px;
+    display:block;
+    margin-bottom:4px;
+  }
+
+  /* ---------- footer / contact ---------- */
+  footer{
+    background:var(--navy);
+    color:#DCEBE8;
+    padding:50px 24px 28px;
+  }
+  .footer-inner{
+    max-width:1040px;
+    margin:0 auto;
+  }
+  .footer-inner h2{color:#fff; font-size:26px;}
+  .footer-inner .hero-role{color:var(--teal-bright);}
+  .footer-inner p{color:#B9CDC9; max-width:520px; font-size:14.5px;}
+  .footer-contact{
+    margin-top:22px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .footer-contact a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    padding:9px 16px;
+    border:1px solid #2C4C57;
+    border-radius:999px;
+    text-decoration:none;
+    color:#DCEBE8;
+    transition:background 0.2s ease, border-color 0.2s ease;
+  }
+  .footer-contact a:hover{background:#17414A; border-color:var(--teal-bright);}
+  .footer-bottom{
+    margin-top:36px;
+    padding-top:18px;
+    border-top:1px solid #1F3E47;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:#7E9891;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="stamp-bar">
+  <span>Case Report Form <span class="dot">•</span> Candidate Profile</span>
+  <span>Site: Kolkata, IN <span class="dot">•</span> Status: Available for hire</span>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-id mono">R. BHANDARI</div>
+    <div class="nav-links">
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#project">Project</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="overview" style="padding-top:44px;">
+    <div class="crf-card reveal">
+      <div class="crf-top">
+        <div class="crf-field">
+          <span class="label">Subject Initials</span>
+          <span class="value">R.B.</span>
+        </div>
+        <div class="crf-field">
+          <span class="label">Protocol</span>
+          <span class="value">Clinical Research Career</span>
+        </div>
+        <div class="crf-field">
+          <span class="label">Site</span>
+          <span class="value">Kolkata, West Bengal</span>
+        </div>
+        <div class="crf-field">
+          <span class="label">Phase</span>
+          <span class="value">Entry-Level</span>
+        </div>
+      </div>
+      <div class="crf-body">
+        <div class="hero-name">Riju Bhandari</div>
+        <div class="hero-role">B.PHARM GRADUATE — CLINICAL RESEARCH · CLINICAL DATA MANAGEMENT · PHARMACOVIGILANCE</div>
+        <p class="hero-obj">
+          Detail-oriented pharmacy graduate looking to start a career in clinical research and drug safety.
+          Grounded in ICH-GCP, trial phases I–IV, adverse event reporting, and accurate clinical data handling,
+          with hands-on experience from an antimicrobial formulation research project carried through to publication.
+        </p>
+        <div class="contact-row">
+          <a class="chip" href="mailto:rijubhandari2002@gmail.com"><span class="sw"></span>rijubhandari2002@gmail.com</a>
+          <a class="chip" href="tel:+919382655806"><span class="sw"></span>+91 93826 55806</a>
+          <span class="chip"><span class="sw"></span>Kolkata, West Bengal, India</span>
+          <span class="chip"><span class="sw"></span>English · Hindi · Bengali</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Study History</span>
+      <h2>Education, by phase</h2>
+    </div>
+    <div class="phase-line reveal">
+      <div class="phase-track">
+        <div class="phase-item">
+          <span class="phase-tag">Phase I</span>
+          <div class="phase-title">Secondary Education (10th)</div>
+          <div class="phase-meta">
+            <span>Kautala Ramkrishna Ashram High School</span>
+            <span><b>West Bengal Board of Secondary Education</b></span>
+            <span>2018 · 59%</span>
+          </div>
+        </div>
+        <div class="phase-item">
+          <span class="phase-tag">Phase II</span>
+          <div class="phase-title">Senior Secondary (Intermediate)</div>
+          <div class="phase-meta">
+            <span>Kautala Ramkrishna Ashram High School</span>
+            <span><b>West Bengal Board of Secondary Education</b></span>
+            <span>2020 · 72%</span>
+          </div>
+        </div>
+        <div class="phase-item current">
+          <span class="phase-tag">Phase III</span>
+          <div class="phase-title">Bachelor of Pharmacy</div>
+          <div class="phase-meta">
+            <span>Aditya College of Pharmacy</span>
+            <span><b>JNTUK</b></span>
+            <span>2025 · 7 CGPA</span>
+          </div>
+        </div>
+        <div class="phase-item">
+          <span class="phase-tag">Phase IV</span>
+          <div class="phase-title">Professional Certification & Applied Research</div>
+          <div class="phase-meta">
+            <span>Pharmacovigilance, clinical research & medical device vigilance certifications</span>
+            <span><b>Published research project</b></span>
+            <span>2023 – 2025</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Core Competencies</span>
+      <h2>Top skills</h2>
+    </div>
+    <div class="skill-grid reveal">
+      <div class="skill-card">
+        <span class="eyebrow">01 · Clinical Research &amp; GCP</span>
+        <h3>Trial conduct &amp; regulatory knowledge</h3>
+        <div class="pill-wrap">
+          <span class="pill">Trial phases I–IV &amp; study design</span>
+          <span class="pill">ICH-GCP guidelines</span>
+          <span class="pill">Protocols &amp; ICFs</span>
+          <span class="pill">Monitoring visit reports</span>
+          <span class="pill">INDA / NDA / ANDA familiarity</span>
+          <span class="pill">Patient screening &amp; enrollment</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="eyebrow">02 · Pharmacovigilance &amp; Drug Safety</span>
+        <h3>Adverse event &amp; safety reporting</h3>
+        <div class="pill-wrap">
+          <span class="pill">AE / SAE reporting</span>
+          <span class="pill">MedDRA coding</span>
+          <span class="pill">Safety database &amp; CRF process</span>
+          <span class="pill">GVP &amp; GMP modules</span>
+          <span class="pill">ADR diagnosis</span>
+          <span class="pill">Medical device vigilance (21 CFR 803, EU MDR)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="eyebrow">03 · Clinical Data Management</span>
+        <h3>Accurate, verifiable data handling</h3>
+        <div class="pill-wrap">
+          <span class="pill">Data entry &amp; verification</span>
+          <span class="pill">Source document maintenance</span>
+          <span class="pill">Medication therapy review (DUE/DUR)</span>
+          <span class="pill">Medical terminology &amp; coding systems</span>
+          <span class="pill">Attention to detail</span>
+          <span class="pill">Data-oriented documentation</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="eyebrow">04 · Technical &amp; Professional</span>
+        <h3>Tools &amp; collaboration</h3>
+        <div class="pill-wrap">
+          <span class="pill">MS Word / Excel / PowerPoint</span>
+          <span class="pill">AI &amp; ChatGPT basics for research</span>
+          <span class="pill">Time management</span>
+          <span class="pill">Professional communication</span>
+          <span class="pill">Complaint handling &amp; risk analysis</span>
+          <span class="pill">Team collaboration &amp; adaptability</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Verified Training</span>
+      <h2>Certifications</h2>
+    </div>
+    <div class="cert-grid reveal">
+      <div class="cert-card">
+        <h3>Clinical Research</h3>
+        <div class="issuer">Clinetra Solutions</div>
+        <ul>
+          <li>Clinical trial phases I–IV and study implementation</li>
+          <li>ICH-GCP, INDA, NDA, and ANDA fundamentals</li>
+          <li>Patient screening, enrollment &amp; source documents</li>
+          <li>AE / SAE reporting</li>
+        </ul>
+      </div>
+      <div class="cert-card">
+        <h3>Pharmacovigilance</h3>
+        <div class="issuer">Clinetra Solutions</div>
+        <ul>
+          <li>Basic concepts of pharmacovigilance &amp; ICH-GCP</li>
+          <li>CRF process, safety database &amp; MedDRA coding</li>
+          <li>Adverse event reporting, GVP &amp; GMP modules</li>
+        </ul>
+      </div>
+      <div class="cert-card">
+        <h3>Medical Device Vigilance</h3>
+        <div class="issuer">Clinetra Solutions</div>
+        <ul>
+          <li>Medical device classifications</li>
+          <li>Post-market monitoring &amp; patient safety</li>
+          <li>21 CFR 803, EU MDR &amp; regulatory reporting bodies</li>
+        </ul>
+      </div>
+      <div class="cert-card">
+        <h3>ICH Good Clinical Practice</h3>
+        <div class="issuer">The Global Health Network (online)</div>
+        <ul>
+          <li>International standard for conducting clinical trials</li>
+          <li>Ethics, safety, and data integrity in research</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="webinar-list reveal">
+      <span class="eyebrow">Additional Webinars — Aditya College of Pharmacy</span>
+      <div class="webinar-row"><span>Regulatory affairs in pharma industries &amp; regulatory strategies for different markets</span><span>26 Sep 2023</span></div>
+      <div class="webinar-row"><span>Chronopharmacology: new insights and therapeutic implications</span><span>30 Sep 2023</span></div>
+      <div class="webinar-row"><span>Impact of ChatGPT on drug discovery</span><span>05 Oct 2023</span></div>
+      <div class="webinar-row"><span>Diagnosis of adverse drug reaction &amp; basics of MedDRA coding</span><span>07 Oct 2023</span></div>
+    </div>
+  </section>
+
+  <!-- PROJECT -->
+  <section id="project">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Final Year Research Project</span>
+      <h2>Published study</h2>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-head">
+        <div>
+          <div class="project-title">Exploring the Antimicrobial Potential of Allium Sativum and Lawsonia Inermis Emulgels: A Comparative Insight</div>
+          <div class="cite-line">
+            Arumilli S, Maity SK, Bhandari R, Pati S, Bhandari R, Ghosh A. Int J Pharm Res Applications, Vol 10, Issue 2 (Mar–Apr 2025), pp. 976–986. ISSN 2456-4494.<br>
+            DOI: <a href="https://doi.org/10.35629/4494-1002976986" target="_blank" rel="noopener">10.35629/4494-1002976986</a> · Duration: June 2024 – April 2025
+          </div>
+        </div>
+        <span class="stamp">Published</span>
+      </div>
+      <div class="project-body">
+        <p>
+          This project formulated topical emulgels from garlic (Allium sativum) and henna (Lawsonia inermis)
+          extracts to compare their antimicrobial performance as a plant-based alternative to conventional
+          topical antimicrobials. Extracts were prepared by maceration, incorporated into a Carbopol-based
+          emulgel base, and benchmarked across physicochemical, safety, and antimicrobial parameters.
+        </p>
+        <p class="role-note"><b>My contribution:</b> formulation and evaluation work as part of a six-member team in the Department of Pharmaceutics, Aditya College of Pharmacy, including extract preparation, emulgel evaluation testing, and antimicrobial assay support.</p>
+
+        <div class="method-strip">
+          <div class="method-item"><span class="num">01</span>Maceration extraction of garlic &amp; henna in ethanol</div>
+          <div class="method-item"><span class="num">02</span>Emulgel formulation with Carbopol, Tween 80 &amp; Span 40</div>
+          <div class="method-item"><span class="num">03</span>Physicochemical &amp; FTIR evaluation</div>
+          <div class="method-item"><span class="num">04</span>Rabbit skin irritation &amp; agar well antimicrobial assay</div>
+        </div>
+
+        <div class="findings-grid">
+          <div class="data-panel">
+            <span class="eyebrow">Zone of Inhibition (mm)</span>
+            <div class="zoi-row"><span class="zoi-label">Garlic · E. coli</span><div class="zoi-bar-bg"><div class="zoi-bar" style="width:87%"></div></div><span class="zoi-val">13.8</span></div>
+            <div class="zoi-row"><span class="zoi-label">Garlic · S. aureus</span><div class="zoi-bar-bg"><div class="zoi-bar" style="width:78%"></div></div><span class="zoi-val">12.4</span></div>
+            <div class="zoi-row"><span class="zoi-label">Henna · E. coli</span><div class="zoi-bar-bg"><div class="zoi-bar" style="width:67%"></div></div><span class="zoi-val">10.6</span></div>
+            <div class="zoi-row"><span class="zoi-label">Henna · S. aureus</span><div class="zoi-bar-bg"><div class="zoi-bar" style="width:74%"></div></div><span class="zoi-val">11.8</span></div>
+          </div>
+          <div class="data-panel">
+            <span class="eyebrow">Key Physicochemical Results</span>
+            <table class="param-table">
+              <tr><th>Parameter</th><th>Garlic</th><th>Henna</th></tr>
+              <tr><td>pH</td><td class="num">6.50</td><td class="num">6.56</td></tr>
+              <tr><td>Viscosity (cps)</td><td class="num">3990</td><td class="num">3190</td></tr>
+              <tr><td>Spreadability (cm)</td><td class="num">7.1</td><td class="num">6.0</td></tr>
+              <tr><td>4h drug release</td><td class="num">92.8%</td><td class="num">90.9%</td></tr>
+              <tr><td>Phase separation</td><td class="num">None</td><td class="num">None</td></tr>
+              <tr><td>Skin irritation</td><td class="num">None</td><td class="num">None</td></tr>
+            </table>
+          </div>
+        </div>
+        <p style="margin-top:20px;">
+          The garlic emulgel produced the stronger antibacterial effect against both organisms, while both
+          formulations remained stable, non-irritant, and chemically intact after processing — supporting
+          their potential as low-cost, plant-based topical antimicrobial options.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="footer-inner reveal">
+    <span class="eyebrow" style="color:#7E9891;">Get In Touch</span>
+    <h2 style="margin-top:8px;">Let's work together</h2>
+    <div class="hero-role" style="margin-top:6px;">OPEN TO CLINICAL RESEARCH · CDM · PHARMACOVIGILANCE ROLES</div>
+    <p style="margin-top:16px;">
+      Based in Kolkata, West Bengal, and open to opportunities across clinical research, clinical data
+      management, and pharmacovigilance functions in pharma, biotech, or CRO organizations.
+    </p>
+    <div class="footer-contact">
+      <a href="mailto:rijubhandari2002@gmail.com">rijubhandari2002@gmail.com</a>
+      <a href="tel:+919382655806">+91 93826 55806</a>
+    </div>
+    <div class="footer-bottom">
+      <span>© Riju Bhandari</span>
+      <span>Declaration: details presented are true to the best of my knowledge.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
